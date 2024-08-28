@@ -5,7 +5,6 @@ GitOps Toolkit is a Docker image that contains a collection of tools necessary f
 ## Tools Included
 
 {{ tools_table }}
-
 ## UseCase
 
 This image is mainly intended to be the base for DevContainer setups (hence the `devcontainers/python` base image) or to be the base image for CI runs.
@@ -16,23 +15,23 @@ Here is an example of a devcontainer configuration using this image.
 
 ```json5
 {
-	"name": "GitOps Toolkit",
-	"image": "ghcr.io/mirceanton/gitops-toolkit:latest",
-	"containerEnv": {
-		"KUBECONFIG": "/home/vscode/.kube/config",
-		"KUBECONFIG_DIR": "/home/vscode/.kube/configs/",
-		"TALOSCONFIG": "/home/vscode/.talos/config",
-		"TALOSCONFIG_DIR": "/home/vscode/.talos/configs/"
-	},
-	"mounts": [
-		"source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
-		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.config/sops/age/keys.txt,target=/home/vscode/.config/sops/age/keys.txt,type=bind,consistency=cached",
-		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.kube/,target=/home/vscode/.kube/,type=bind,consistency=cached",
-		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.talos/,target=/home/vscode/.talos/,type=bind,consistency=cached"
-	],
-	"remoteUser": "vscode",
-	"containerUser": "vscode",
-	"updateRemoteUserUID": true
+  "name": "GitOps Toolkit",
+  "image": "ghcr.io/mirceanton/gitops-toolkit:latest",
+  "containerEnv": {
+    "KUBECONFIG": "/home/vscode/.kube/config",
+    "KUBECONFIG_DIR": "/home/vscode/.kube/configs/",
+    "TALOSCONFIG": "/home/vscode/.talos/config",
+    "TALOSCONFIG_DIR": "/home/vscode/.talos/configs/"
+  },
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.age.key,target=${containerWorkspaceFolder}/.age.key,type=bind,consistency=cached",
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.kube/,target=/home/vscode/.kube/,type=bind,consistency=cached",
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.talos/,target=/home/vscode/.talos/,type=bind,consistency=cached"
+  ],
+  "remoteUser": "vscode",
+  "containerUser": "vscode",
+  "updateRemoteUserUID": true
 }
 ```
 

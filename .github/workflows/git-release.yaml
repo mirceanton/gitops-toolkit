@@ -1,0 +1,15 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Git Release
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: ["main"]
+    paths:
+      - Dockerfile
+
+jobs:
+  release:
+    uses: mirceanton/reusable-workflows/.github/workflows/git-release-semver.yaml@main
+    secrets: inherit

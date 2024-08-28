@@ -1,0 +1,16 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/label-commenter-config.json
+# =================================================================================================
+# Area Labels
+# =================================================================================================
+area/devcontainer:
+  - changed-files:
+      - any-glob-to-any-file: ".devcontainer/**/*"
+
+area/github:
+  - changed-files:
+      - any-glob-to-any-file: ".github/**/*"
+
+area/docker:
+  - changed-files:
+      - any-glob-to-any-file: "Dockerfile"

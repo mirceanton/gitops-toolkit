@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "aaron-bond.better-comments",
+        "albert.TabOut",
+        "mhutchie.git-graph",
+        "redhat.vscode-yaml",
+        "pkief.material-icon-theme",
+        "GitHub.copilot",
+        "ms-azuretools.vscode-docker",
+        "DavidAnson.vscode-markdownlint"
+    ],
+}

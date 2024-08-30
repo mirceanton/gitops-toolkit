@@ -107,6 +107,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
 	htop \
 	net-tools \
 	iputils-ping \
+ docker-compose \
 	dnsutils && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
@@ -173,6 +174,8 @@ RUN flux completion bash | sudo tee /etc/bash_completion.d/flux.bash > /dev/null
 
 # Install bitwarden CLI
 COPY --from=bitwarden-cli /bin/bw /usr/local/bin/bw
+
+RUN usermod -aG docker vscode
 
 USER vscode
 WORKDIR /workspace

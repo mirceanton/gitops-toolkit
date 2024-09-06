@@ -3,13 +3,27 @@
 name: Git Release
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: Dry run
+        default: true
+        required: false
+        type: boolean
+
+  pull_request:
+    paths:
+      - ".github/workflows/git-release.yaml"
+      - "README.md"
+
   push:
     branches: ["main"]
     paths:
-      - README.md # This file should be automatically generated when something changes in the docker image
+      - "README.md"
 
 jobs:
   release:
-    uses: mirceanton/reusable-workflows/.github/workflows/git-release-calver.yaml@main
+    uses: mirceanton/reusable-workflows/.github/workflows/git-release-calver.yaml@feb7161818c3ae82cd4ea25c606c1feefa19643d
     secrets: inherit
+    with:
+      dry-run: ${{ inputs.dry-run || github.event.name == 'pull_request' }}

@@ -5,14 +5,21 @@ name: Renovate
 on:
   workflow_dispatch:
     inputs:
-      dryRun:
+      dry-run:
         description: Dry Run
-        default: "false"
+        default: false
         required: false
-      logLevel:
+        type: boolean
+      log-level:
         description: Log Level
         default: debug
         required: false
+        type: string
+  pull_request:
+    paths:
+      - ".github/workflows/renovate.yaml"
+      - ".github/configs/renovate/*.json5"
+      - "renovate.json5"
   schedule:
     - cron: "0 * * * *" # hourly
 
@@ -22,8 +29,8 @@ concurrency:
 
 jobs:
   renovate:
-    uses: mirceanton/reusable-workflows/.github/workflows/renovate.yaml@main
+    uses: mirceanton/reusable-workflows/.github/workflows/renovate.yaml@feb7161818c3ae82cd4ea25c606c1feefa19643d
     secrets: inherit
     with:
-      dryRun: "${{ inputs.dryRun == true }}"
-      logLevel: "${{ inputs.logLevel || 'debug' }}"
+      dry-run: "${{ inputs.dry-run == true || github.event_name == 'pull_request' }}"
+      log-level: "${{ inputs.log-level || 'debug' }}"

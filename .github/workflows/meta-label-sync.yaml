@@ -1,27 +1,34 @@
 ---
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
-name: "Meta: Label Sync"
+name: Meta - Label Sync
 
 on:
-  workflow_dispatch: {} # Manual Trigger
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: Dry Run
+        default: true
+        required: false
+        type: boolean
+
+  pull_request:
+    paths:
+      - ".github/configs/labels.yaml"
+      - ".github/workflows/meta-label-sync.yaml"
+
   push:
     branches: ["main"]
     paths:
       - ".github/configs/labels.yaml"
       - ".github/workflows/meta-label-sync.yaml"
+
   schedule:
     - cron: "0 0 * * *" # Every day at midnight
 
-permissions:
-  issues: write
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
-  cancel-in-progress: true
-
 jobs:
   label-sync:
-    uses: mirceanton/reusable-workflows/.github/workflows/meta-label-sync.yaml@main
+    uses: mirceanton/reusable-workflows/.github/workflows/meta-label-sync.yaml@feb7161818c3ae82cd4ea25c606c1feefa19643d
     secrets: inherit
     with:
-      config-file: .github/configs/labels.yaml
+      dry-run: ${{ inputs.dry-run || github.event_name == 'pull_request' }}
+      config-file: ".github/configs/labels.yaml"

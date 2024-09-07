@@ -11,8 +11,10 @@ on:
   pull_request:
     paths:
       - ".github/workflows/readme-generator.yaml"
-      - ".github/scripts/**/*"
+      - ".github/scripts/README_template.j2"
+      - ".github/scripts/readme-generator.py"
       - "Dockerfile"
+      - "requirements.txt"
 
 jobs:
   generate-readme:

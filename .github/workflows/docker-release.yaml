@@ -37,4 +37,4 @@ jobs:
         ${{ inputs.custom-tag }}
       context: .
       dockerfile: ./Dockerfile
-      dry-run: "${{ inputs.dry-run }}"
+      dry-run: "${{ inputs.dry-run == true }}"

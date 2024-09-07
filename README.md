@@ -9,7 +9,7 @@ GitOps Toolkit is a Docker image that contains a collection of tools necessary f
 | Terraform | 1.9.5 |
 | Tflint | v0.53.0 |
 | Sops | v3.9.0 |
-| Age | v1.1.1 |
+| Age | v1.2.0 |
 | Flux | v2.3.0 |
 | Kubectl | 1.31.0 |
 | Kubeswitcher | v1.0.2 |
@@ -20,7 +20,7 @@ GitOps Toolkit is a Docker image that contains a collection of tools necessary f
 | Talosctl | v1.7.6 |
 | Talswitcher | v1.1.0 |
 | Talhelper | v3.0.5 |
-| Taskfile | v3.32.0 |
+| Taskfile | v3.38.0 |
 | Bitwarden Cli | 2024.8.1 |
 | yamllint | 1.35.1 |
 | jq | 1.8.0 |

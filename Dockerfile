@@ -61,27 +61,27 @@ FROM ghcr.io/budimanjojo/talhelper:${TALHELPER_VERSION} AS talhelper
 ## ================================================================================================
 # Build stages for other utilities
 ## ================================================================================================
-FROM alpine@sha256:0a4eaa0eecf5f8c050e5bba433f58c052be7587ee8af3e8b3910ef9ab5fbe9f5 AS taskfile
+FROM alpine@sha256:beefdbd8a1da6d2915566fde36db9db0b524eb737fc57cd1367effd16dc0d06d AS taskfile
 ARG TASKFILE_VERSION
 RUN wget https://raw.githubusercontent.com/go-task/task/${TASKFILE_VERSION}/completion/bash/task.bash -O /task_completion.bash
 RUN wget https://github.com/go-task/task/releases/download/${TASKFILE_VERSION}/task_linux_amd64.tar.gz && \
 	tar xvf task_linux_amd64.tar.gz && \
 	mv task /bin/task
 
-FROM alpine@sha256:0a4eaa0eecf5f8c050e5bba433f58c052be7587ee8af3e8b3910ef9ab5fbe9f5 AS bitwarden-cli
+FROM alpine@sha256:beefdbd8a1da6d2915566fde36db9db0b524eb737fc57cd1367effd16dc0d06d AS bitwarden-cli
 ARG BITWARDEN_CLI_VERSION
 RUN wget https://github.com/bitwarden/clients/releases/download/cli-v${BITWARDEN_CLI_VERSION}/bw-oss-linux-${BITWARDEN_CLI_VERSION}.zip -O bitwarden.zip && \
 	unzip bitwarden.zip && \
 	mv bw /bin/bw
 
-FROM alpine@sha256:0a4eaa0eecf5f8c050e5bba433f58c052be7587ee8af3e8b3910ef9ab5fbe9f5 AS age
+FROM alpine@sha256:beefdbd8a1da6d2915566fde36db9db0b524eb737fc57cd1367effd16dc0d06d AS age
 ARG AGE_VERSION
 RUN wget https://github.com/FiloSottile/age/releases/download/${AGE_VERSION}/age-${AGE_VERSION}-linux-amd64.tar.gz -O age.tar.gz && \
 	tar xvf age.tar.gz && \
 	mv age/age /bin/age && \
 	mv age/age-keygen /bin/age-keygen
 
-FROM alpine@sha256:0a4eaa0eecf5f8c050e5bba433f58c052be7587ee8af3e8b3910ef9ab5fbe9f5 AS helm
+FROM alpine@sha256:beefdbd8a1da6d2915566fde36db9db0b524eb737fc57cd1367effd16dc0d06d AS helm
 ARG HELM_VERSION
 RUN wget https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz -O helm.tar.gz && \
 	tar xvf helm.tar.gz && \

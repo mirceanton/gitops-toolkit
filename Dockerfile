@@ -8,6 +8,7 @@ ARG TFLINT_VERSION=v0.53.0@sha256:50a7efe689344733a21947a6253cbca9b1a03b3f237938
 # Secret Encryption Stuff
 ARG SOPS_VERSION=v3.9.0-alpine@sha256:eb08d77bc070a0ae1042875ab563bad8d2d0eba40518c1cb68e123f47b106134
 ARG AGE_VERSION=v1.2.0
+ARG AGE_KEYGEN_VERSION=V1.2.0
 
 # Kubernetes Stuff
 ARG FLUX_VERSION=v2.3.0@sha256:b0b43636bede7fee04afa99b9ad0732eca0f1778f7ebaa99fc89d48d35ccae18
@@ -38,7 +39,7 @@ FROM ghcr.io/terraform-linters/tflint:${TFLINT_VERSION} AS tflint
 # Secret Encryption Stuff
 FROM ghcr.io/getsops/sops:${SOPS_VERSION} AS sops
 FROM ghcr.io/mirceanton/age:${AGE_VERSION} AS age
-FROM ghcr.io/mirceanton/age-keygen:${AGE_VERSION} AS age-keygen
+FROM ghcr.io/mirceanton/age-keygen:${AGE_KEYGEN_VERSION} AS age-keygen
 
 # Kubernetes Stuff
 FROM ghcr.io/fluxcd/flux-cli:${FLUX_VERSION} AS flux

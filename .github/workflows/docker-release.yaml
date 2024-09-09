@@ -27,7 +27,7 @@ on:
 
 jobs:
   release:
-    uses: mirceanton/reusable-workflows/.github/workflows/docker-release.yaml@17d8ef4df857d93b905170956fbbcd56b296e8bb
+    uses: mirceanton/reusable-workflows/.github/workflows/docker-release.yaml@8343dab107e640303a30a4d4a7af2d5eb257e817
     secrets: inherit
     with:
       image: ghcr.io/${{ github.repository }}

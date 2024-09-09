@@ -29,7 +29,7 @@ concurrency:
 
 jobs:
   renovate:
-    uses: mirceanton/reusable-workflows/.github/workflows/renovate.yaml@17d8ef4df857d93b905170956fbbcd56b296e8bb
+    uses: mirceanton/reusable-workflows/.github/workflows/renovate.yaml@8343dab107e640303a30a4d4a7af2d5eb257e817
     secrets: inherit
     with:
       dry-run: "${{ inputs.dry-run == true || github.event_name == 'pull_request' }}"

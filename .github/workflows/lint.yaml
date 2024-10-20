@@ -1,0 +1,19 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Lint
+
+on:
+  # Manual Trigger
+  workflow_dispatch: {}
+
+  # Run on any PR
+  pull_request: {}
+
+jobs:
+  actionlint:
+    uses: mirceanton/reusable-workflows/.github/workflows/reusable-actionlint.yaml@f4dce998a168bbe2e53664acf4dd29407cd3d29f # v3.4.19
+    secrets: inherit
+
+  commitlint:
+    uses: mirceanton/reusable-workflows/.github/workflows/reusable-commitlint.yaml@f4dce998a168bbe2e53664acf4dd29407cd3d29f # v3.4.19
+    secrets: inherit

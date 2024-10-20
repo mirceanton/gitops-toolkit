@@ -79,7 +79,7 @@ RUN wget https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz -O helm.tar
 ## ================================================================================================
 ## Main image
 ## ================================================================================================
-FROM mcr.microsoft.com/devcontainers/python:3.12-bullseye@sha256:d20b278aa97a5536bebfb2338d0e7814309d8fe4d28e2751bd3857e523e60b4a AS workspace
+FROM mcr.microsoft.com/devcontainers/python:3.12-bullseye@sha256:d43b2ff9bfb3ad6c6f1ce96fd533f0dae51addf007f574610df5cf277704aa76 AS workspace
 ENV EDITOR=vim
 
 # Install tools

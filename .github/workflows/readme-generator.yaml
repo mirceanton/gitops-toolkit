@@ -42,7 +42,8 @@ jobs:
         run: pip install Jinja2
 
       - name: Generate README
-        run: cd .github/scripts && python3 readme-generator.py
+        working-directory: .github/scripts
+        run: python3 readme-generator.py
 
       - name: Show changes
         run: cat README.md

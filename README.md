@@ -8,7 +8,7 @@ GitOps Toolkit is a Docker image that contains a collection of tools necessary f
 |----------------|---------|
 | Terraform | 1.9.8 |
 | Tflint | v0.53.0 |
-| Sops | v3.9.0 |
+| Sops | v3.9.1 |
 | Age | v1.2.0 |
 | Age Keygen | V1.2.0 |
 | Flux | v2.4.0 |

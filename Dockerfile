@@ -18,6 +18,7 @@ ARG K9S_VERSION=v0.32.4@sha256:32e0cf06b70f1b7e7576b64b378170ddda194b491ef4d04b7
 ARG HELM_VERSION=v3.13.3
 ARG KUSTOMIZE_VERSION=v5.4.3@sha256:6dd0a67e2a8634a5d1aabd9c5e888ff220663e979b55bc17fe4b3a845718bb10
 ARG STERN_VERSION=1.31.0@sha256:6d4bc0513326811f8375da3a86e4ae3a4719412414c54d1b3409bddf1a183ac4
+ARG KUBECOLOR_VERSION=v0.4.0
 
 # Talos Stuff
 ARG TALOSCTL_VERSION=v1.8.1@sha256:aee38cf2eafda9815ce58f0eb261c14a1cbdc675af249c1a055d6c8089292bee
@@ -44,11 +45,12 @@ FROM ghcr.io/mirceanton/age-keygen:${AGE_KEYGEN_VERSION} AS age-keygen
 # Kubernetes Stuff
 FROM ghcr.io/fluxcd/flux-cli:${FLUX_VERSION} AS flux
 FROM docker.io/bitnami/kubectl:${KUBECTL_VERSION} AS kubectl
-FROM ghcr.io/mirceanton/kubectl-switch:${KUBECTL_SWITCH_VERSION} AS kubeswitcher
+FROM ghcr.io/mirceanton/kubectl-switch:${KUBECTL_SWITCH_VERSION} AS kubectl-switch
 FROM docker.io/derailed/k9s:${K9S_VERSION} AS k9s
 #TODO: helm container
 FROM registry.k8s.io/kustomize/kustomize:${KUSTOMIZE_VERSION} AS kustomize
 FROM ghcr.io/stern/stern:${STERN_VERSION} AS stern
+FROM ghcr.io/kubecolor/kubecolor:${KUBECOLOR_VERSION} as kubecolor
 
 # Talos Stuff
 FROM ghcr.io/siderolabs/talosctl:${TALOSCTL_VERSION} AS talosctl
@@ -96,10 +98,11 @@ COPY --from=talhelper /bin/talhelper /usr/local/bin/talhelper
 COPY --from=talswitcher /talswitcher /usr/local/bin/talswitcher
 COPY --from=taskfile /task /usr/local/bin/task
 COPY --from=kubectl /opt/bitnami/kubectl/bin/kubectl /usr/local/bin/kubectl
-COPY --from=kubeswitcher /kubectl-switch /usr/local/bin/kubectl-switch
+COPY --from=kubectl-switch /kubectl-switch /usr/local/bin/kubectl-switch
 COPY --from=helm /bin/helm /usr/local/bin/helm
 COPY --from=flux /usr/local/bin/flux /usr/local/bin/flux
 COPY --from=bitwarden-cli /bin/bw /usr/local/bin/bw
+COPY --from=kubecolor /usr/local/bin/kubecolor /usr/local/bin/kubecolor
 
 # Setup bash completions
 RUN kustomize completion bash | sudo tee /etc/bash_completion.d/kustomize.bash > /dev/null

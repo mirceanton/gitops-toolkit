@@ -101,6 +101,7 @@ COPY --from=kubectl-switch /kubectl-switch /usr/local/bin/kubectl-switch
 COPY --from=helm /bin/helm /usr/local/bin/helm
 COPY --from=flux /usr/local/bin/flux /usr/local/bin/flux
 COPY --from=bitwarden-cli /bin/bw /usr/local/bin/bw
+COPY --from=kubecolor /usr/local/bin/kubecolor /usr/local/bin/kubecolor
 
 # Setup bash completions
 RUN kustomize completion bash | sudo tee /etc/bash_completion.d/kustomize.bash > /dev/null

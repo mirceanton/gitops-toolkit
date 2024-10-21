@@ -13,7 +13,7 @@ ARG AGE_KEYGEN_VERSION=V1.2.0@sha256:3c741e8533806a5b45e5aaf8e8b1646d1570a3c95d6
 # Kubernetes Stuff
 ARG FLUX_VERSION=v2.4.0@sha256:a9cb966cddc1a0c56dc0d57dda485d9477dd397f8b45f222717b24663471fd1f
 ARG KUBECTL_VERSION=1.31.1@sha256:b509ab6000477ebe788df3509a8c4177e91238ee3003f33edea0931be3794340
-ARG KUBESWITCHER_VERSION=v1.0.3@sha256:697f8ddbac55127faad5ebf7bd287af8165b17bab374548dbeade3c0b79c8204
+ARG KUBECTL_SWITCH_VERSION=v2.0.0
 ARG K9S_VERSION=v0.32.4@sha256:32e0cf06b70f1b7e7576b64b378170ddda194b491ef4d04b7303f1b8ab81a771
 ARG HELM_VERSION=v3.13.3
 ARG KUSTOMIZE_VERSION=v5.4.3@sha256:6dd0a67e2a8634a5d1aabd9c5e888ff220663e979b55bc17fe4b3a845718bb10
@@ -44,7 +44,7 @@ FROM ghcr.io/mirceanton/age-keygen:${AGE_KEYGEN_VERSION} AS age-keygen
 # Kubernetes Stuff
 FROM ghcr.io/fluxcd/flux-cli:${FLUX_VERSION} AS flux
 FROM docker.io/bitnami/kubectl:${KUBECTL_VERSION} AS kubectl
-FROM ghcr.io/mirceanton/kube-switcher:${KUBESWITCHER_VERSION} AS kubeswitcher
+FROM ghcr.io/mirceanton/kubectl-switch:${KUBECTL_SWITCH_VERSION} AS kubeswitcher
 FROM docker.io/derailed/k9s:${K9S_VERSION} AS k9s
 #TODO: helm container
 FROM registry.k8s.io/kustomize/kustomize:${KUSTOMIZE_VERSION} AS kustomize
@@ -96,7 +96,7 @@ COPY --from=talhelper /bin/talhelper /usr/local/bin/talhelper
 COPY --from=talswitcher /talswitcher /usr/local/bin/talswitcher
 COPY --from=taskfile /task /usr/local/bin/task
 COPY --from=kubectl /opt/bitnami/kubectl/bin/kubectl /usr/local/bin/kubectl
-COPY --from=kubeswitcher /kube-switcher /usr/local/bin/kubectl-switch
+COPY --from=kubeswitcher /kubectl-switch /usr/local/bin/kubectl-switch
 COPY --from=helm /bin/helm /usr/local/bin/helm
 COPY --from=flux /usr/local/bin/flux /usr/local/bin/flux
 COPY --from=bitwarden-cli /bin/bw /usr/local/bin/bw

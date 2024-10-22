@@ -117,6 +117,7 @@ RUN kubectl switch completion bash | sudo tee /etc/bash_completion.d/kubectl-swi
 RUN helm completion bash | sudo tee /etc/bash_completion.d/helm.bash > /dev/null
 RUN flux completion bash | sudo tee /etc/bash_completion.d/flux.bash > /dev/null
 RUN terraform -install-autocomplete
+RUN echo "complete -C /usr/local/bin/mc mc" | sudo tee /etc/bash_completion.d/mc.bash > /dev/null
 
 # Install additional OS packages
 RUN DEBIAN_FRONTEND=noninteractive \

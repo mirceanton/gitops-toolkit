@@ -60,6 +60,7 @@ FROM ghcr.io/budimanjojo/talhelper:${TALHELPER_VERSION} AS talhelper
 # Misc Tools
 FROM ghcr.io/mirceanton/taskfile:${TASKFILE_VERSION} AS taskfile
 #TODO: bw-cli container
+FROM docker.io/minio/mc:${MINIO_CLI_VERSION} AS minio-cli
 
 
 ## ================================================================================================
@@ -103,6 +104,7 @@ COPY --from=helm /bin/helm /usr/local/bin/helm
 COPY --from=flux /usr/local/bin/flux /usr/local/bin/flux
 COPY --from=bitwarden-cli /bin/bw /usr/local/bin/bw
 COPY --from=kubecolor /usr/local/bin/kubecolor /usr/local/bin/kubecolor
+COPY --from=minio-cli /usr/bin/mc /usr/local/bin/mc
 
 # Setup bash completions
 RUN kustomize completion bash | sudo tee /etc/bash_completion.d/kustomize.bash > /dev/null

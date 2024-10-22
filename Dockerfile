@@ -28,7 +28,7 @@ ARG TALHELPER_VERSION=v3.0.7@sha256:0d8a2d1a2803498da4c0ca4554ebd34cca83d1343410
 # Misc Tools
 ARG TASKFILE_VERSION=v3.38.0@sha256:308c4f5be86bffae3f956cbd7225c4fec69b0e7a89012120b818a10df45d7c59
 ARG BITWARDEN_CLI_VERSION=2024.8.1
-ARG MINIO_CLI_VERSION=RELEASE.2024-10-08T09-37-26Z
+ARG MINIO_CLI_VERSION=RELEASE.2024-10-08T09-37-26Z@sha256:c0d345a438dcac5677c1158e4ac46637069b67b3cc38e7b04c08cf93bdee4a62
 
 ## ================================================================================================
 # "Build" stage for utilities with docker images already present

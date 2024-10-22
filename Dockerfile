@@ -28,7 +28,7 @@ ARG TALHELPER_VERSION=v3.0.7@sha256:0d8a2d1a2803498da4c0ca4554ebd34cca83d1343410
 # Misc Tools
 ARG TASKFILE_VERSION=v3.38.0@sha256:308c4f5be86bffae3f956cbd7225c4fec69b0e7a89012120b818a10df45d7c59
 ARG BITWARDEN_CLI_VERSION=2024.8.1
-
+ARG MINIO_CLI_VERSION=RELEASE.2024-10-08T09-37-26Z
 
 ## ================================================================================================
 # "Build" stage for utilities with docker images already present
@@ -60,6 +60,7 @@ FROM ghcr.io/budimanjojo/talhelper:${TALHELPER_VERSION} AS talhelper
 # Misc Tools
 FROM ghcr.io/mirceanton/taskfile:${TASKFILE_VERSION} AS taskfile
 #TODO: bw-cli container
+FROM docker.io/minio/mc:${MINIO_CLI_VERSION} AS minio-cli
 
 
 ## ================================================================================================
@@ -103,6 +104,7 @@ COPY --from=helm /bin/helm /usr/local/bin/helm
 COPY --from=flux /usr/local/bin/flux /usr/local/bin/flux
 COPY --from=bitwarden-cli /bin/bw /usr/local/bin/bw
 COPY --from=kubecolor /usr/local/bin/kubecolor /usr/local/bin/kubecolor
+COPY --from=minio-cli /usr/bin/mc /usr/local/bin/mc
 
 # Setup bash completions
 RUN kustomize completion bash | sudo tee /etc/bash_completion.d/kustomize.bash > /dev/null
@@ -115,6 +117,7 @@ RUN kubectl switch completion bash | sudo tee /etc/bash_completion.d/kubectl-swi
 RUN helm completion bash | sudo tee /etc/bash_completion.d/helm.bash > /dev/null
 RUN flux completion bash | sudo tee /etc/bash_completion.d/flux.bash > /dev/null
 RUN terraform -install-autocomplete
+RUN echo "complete -C /usr/local/bin/mc mc" | sudo tee /etc/bash_completion.d/mc.bash > /dev/null
 
 # Install additional OS packages
 RUN DEBIAN_FRONTEND=noninteractive \

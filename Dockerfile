@@ -12,6 +12,7 @@ ARG AGE_KEYGEN_VERSION=V1.2.0@sha256:3c741e8533806a5b45e5aaf8e8b1646d1570a3c95d6
 
 # Kubernetes Stuff
 ARG FLUX_VERSION=v2.4.0@sha256:a9cb966cddc1a0c56dc0d57dda485d9477dd397f8b45f222717b24663471fd1f
+ARG TFCTL_VERSION=v0.16.0-rc.4
 ARG KUBECTL_VERSION=1.31.1@sha256:b509ab6000477ebe788df3509a8c4177e91238ee3003f33edea0931be3794340
 ARG KUBECTL_SWITCH_VERSION=v2.0.0@sha256:d4a04dbadb6dec078db12aff547add28af18a3e2e5951e430e33cce03e9aa8c3
 ARG K9S_VERSION=v0.32.4@sha256:32e0cf06b70f1b7e7576b64b378170ddda194b491ef4d04b7303f1b8ab81a771
@@ -44,6 +45,7 @@ FROM ghcr.io/mirceanton/age-keygen:${AGE_KEYGEN_VERSION} AS age-keygen
 
 # Kubernetes Stuff
 FROM ghcr.io/fluxcd/flux-cli:${FLUX_VERSION} AS flux
+FROM ghcr.io/mirceanton/tfctl:${TFCTL_VERSION} AS tfctl
 FROM docker.io/bitnami/kubectl:${KUBECTL_VERSION} AS kubectl
 FROM ghcr.io/mirceanton/kubectl-switch:${KUBECTL_SWITCH_VERSION} AS kubectl-switch
 FROM docker.io/derailed/k9s:${K9S_VERSION} AS k9s
@@ -102,6 +104,7 @@ COPY --from=kubectl /opt/bitnami/kubectl/bin/kubectl /usr/local/bin/kubectl
 COPY --from=kubectl-switch /kubectl-switch /usr/local/bin/kubectl-switch
 COPY --from=helm /bin/helm /usr/local/bin/helm
 COPY --from=flux /usr/local/bin/flux /usr/local/bin/flux
+COPY --from=tfctl /tfctl /usr/local/bin/tfctl
 COPY --from=bitwarden-cli /bin/bw /usr/local/bin/bw
 COPY --from=kubecolor /usr/local/bin/kubecolor /usr/local/bin/kubecolor
 COPY --from=minio-cli /usr/bin/mc /usr/local/bin/mc
@@ -111,11 +114,11 @@ RUN kustomize completion bash | sudo tee /etc/bash_completion.d/kustomize.bash >
 RUN stern --completion=bash | sudo tee /etc/bash_completion.d/stern.bash > /dev/null
 RUN talosctl completion bash | sudo tee /etc/bash_completion.d/talosctl.bash > /dev/null
 RUN talhelper completion bash | sudo tee /etc/bash_completion.d/talhelper.bash > /dev/null
-RUN talswitcher completion bash | sudo tee /etc/bash_completion.d/talswitcher.bash > /dev/null
 RUN kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl.bash > /dev/null
 RUN kubectl switch completion bash | sudo tee /etc/bash_completion.d/kubectl-switch.bash > /dev/null
 RUN helm completion bash | sudo tee /etc/bash_completion.d/helm.bash > /dev/null
 RUN flux completion bash | sudo tee /etc/bash_completion.d/flux.bash > /dev/null
+RUN tfctl completion bash | sudo tee /etc/bash_completion.d/tfctl.bash > /dev/null
 RUN terraform -install-autocomplete
 RUN echo "complete -C /usr/local/bin/mc mc" | sudo tee /etc/bash_completion.d/mc.bash > /dev/null
 

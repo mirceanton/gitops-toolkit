@@ -23,7 +23,7 @@ on:
 
 jobs:
   release:
-    uses: mirceanton/reusable-workflows/.github/workflows/reusable-release-calver.yaml@f8a15cef06b25b9ba5fe77ffcf4f4f2810adf1c5
+    uses: mirceanton/reusable-workflows/.github/workflows/reusable-release-calver.yaml@155cb0eb3f146478d30884e385490eb28ce6fd7c
     secrets: inherit
     with:
       dry-run: ${{ inputs.dry-run || github.event_name == 'pull_request' }}

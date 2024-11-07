@@ -11,9 +11,9 @@ on:
 
 jobs:
   actionlint:
-    uses: mirceanton/reusable-workflows/.github/workflows/reusable-actionlint.yaml@4de40c2d203237c9f76d8dd17f1887f027341d04 # v3.4.25
+    uses: mirceanton/reusable-workflows/.github/workflows/reusable-actionlint.yaml@c82f22e5929faec99b551876cc7e123d9a1d48d6 # v3.4.26
     secrets: inherit
 
   commitlint:
-    uses: mirceanton/reusable-workflows/.github/workflows/reusable-commitlint.yaml@4de40c2d203237c9f76d8dd17f1887f027341d04 # v3.4.25
+    uses: mirceanton/reusable-workflows/.github/workflows/reusable-commitlint.yaml@c82f22e5929faec99b551876cc7e123d9a1d48d6 # v3.4.26
     secrets: inherit

@@ -68,13 +68,13 @@ FROM docker.io/minio/mc:${MINIO_CLI_VERSION} AS minio-cli
 ## ================================================================================================
 # Build stages for other utilities
 ## ================================================================================================
-FROM alpine@sha256:beefdbd8a1da6d2915566fde36db9db0b524eb737fc57cd1367effd16dc0d06d AS bitwarden-cli
+FROM alpine@sha256:1e42bbe2508154c9126d48c2b8a75420c3544343bf86fd041fb7527e017a4b4a AS bitwarden-cli
 ARG BITWARDEN_CLI_VERSION
 RUN wget https://github.com/bitwarden/clients/releases/download/cli-v${BITWARDEN_CLI_VERSION}/bw-oss-linux-${BITWARDEN_CLI_VERSION}.zip -O bitwarden.zip && \
 	unzip bitwarden.zip && \
 	mv bw /bin/bw
 
-FROM alpine@sha256:beefdbd8a1da6d2915566fde36db9db0b524eb737fc57cd1367effd16dc0d06d AS helm
+FROM alpine@sha256:1e42bbe2508154c9126d48c2b8a75420c3544343bf86fd041fb7527e017a4b4a AS helm
 ARG HELM_VERSION
 RUN wget https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz -O helm.tar.gz && \
 	tar xvf helm.tar.gz && \

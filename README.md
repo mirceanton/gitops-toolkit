@@ -27,6 +27,7 @@ GitOps Toolkit is a Docker image that contains a collection of tools necessary f
 | Taskfile | v3.38.0 |
 | Minio Cli | RELEASE.2024 |
 | Bitwarden Cli | 2024.8.1 |
+| Cmctl | v2.1.1 |
 | yamllint | 1.35.1 |
 | jq | 1.8.0 |
 | yq | 3.4.3 |

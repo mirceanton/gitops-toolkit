@@ -98,7 +98,8 @@ RUN wget https://github.com/CrunchyData/postgres-operator-client/releases/downlo
 FROM alpine@sha256:1e42bbe2508154c9126d48c2b8a75420c3544343bf86fd041fb7527e017a4b4a AS cmctl
 ARG CMCTL_VERSION
 RUN wget https://github.com/cert-manager/cmctl/releases/download/${CMCTL_VERSION}/cmctl_linux_amd64 && \
-	mv cmctl_linux_amd64 /bin/cmctl
+	mv cmctl_linux_amd64 /bin/cmctl && \
+	chmod +x /bin/cmctl
 
 ## ================================================================================================
 ## Main image

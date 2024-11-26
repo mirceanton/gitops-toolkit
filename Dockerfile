@@ -92,7 +92,8 @@ RUN wget https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz -O helm.tar
 FROM alpine@sha256:1e42bbe2508154c9126d48c2b8a75420c3544343bf86fd041fb7527e017a4b4a AS kubectl-pgo
 ARG KUBECTL_PGO_VERSION
 RUN wget https://github.com/CrunchyData/postgres-operator-client/releases/download/${KUBECTL_PGO_VERSION}/kubectl-pgo-linux-amd64 && \
-	mv kubectl-pgo-linux-amd64 /bin/kubectl-pgo
+	mv kubectl-pgo-linux-amd64 /bin/kubectl-pgo && \
+	chmod +x /bin/kubectl-pgo
 
 ## ================================================================================================
 ## Main image

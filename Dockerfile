@@ -10,16 +10,20 @@ ARG SOPS_VERSION=v3.9.1-alpine@sha256:2019d454974574f7e50ce0c88f7e05d593b5c77a81
 ARG AGE_VERSION=v1.2.0@sha256:7708b4bcb7315f23163eed029cc0ccfc9bc8ad8b100d8da555c812565f845da7
 ARG AGE_KEYGEN_VERSION=V1.2.0@sha256:3c741e8533806a5b45e5aaf8e8b1646d1570a3c95d654752727cf9b73b59ad12
 
-# Kubernetes Stuff
+# Flux Stuff
 ARG FLUX_VERSION=v2.4.0@sha256:a9cb966cddc1a0c56dc0d57dda485d9477dd397f8b45f222717b24663471fd1f
 ARG TFCTL_VERSION=v0.16.0-rc.4@sha256:5bc929e7c083e5357ea9c31716f857784a67e9371835e16357bb038378124748
+
+# Kubectl + Plugins
 ARG KUBECTL_VERSION=1.31.3@sha256:67096b043f84a462b349ebcdcb4258a4f18d1de93ea43cf0df4c908bb877a1ad
-ARG KUBECTL_SWITCH_VERSION=v2.0.0@sha256:d4a04dbadb6dec078db12aff547add28af18a3e2e5951e430e33cce03e9aa8c3
-ARG K9S_VERSION=v0.32.7@sha256:a967991e635dc8327c25c9d20ea71089a9cad66793013c5675c81a1f6c79292b
-ARG HELM_VERSION=v3.13.3
-ARG KUSTOMIZE_VERSION=v5.4.3@sha256:6dd0a67e2a8634a5d1aabd9c5e888ff220663e979b55bc17fe4b3a845718bb10
-ARG STERN_VERSION=1.31.0@sha256:6d4bc0513326811f8375da3a86e4ae3a4719412414c54d1b3409bddf1a183ac4
 ARG KUBECOLOR_VERSION=v0.4.0@sha256:f87c8893a1ae6e031fcb96af6901d146a0542d7ec1a27025d4d9f05e4c18232d
+ARG KUBECTL_SWITCH_VERSION=v2.0.0@sha256:d4a04dbadb6dec078db12aff547add28af18a3e2e5951e430e33cce03e9aa8c3
+
+# Misc K8S Tools
+ARG KUSTOMIZE_VERSION=v5.4.3@sha256:6dd0a67e2a8634a5d1aabd9c5e888ff220663e979b55bc17fe4b3a845718bb10
+ARG HELM_VERSION=v3.13.3
+ARG K9S_VERSION=v0.32.7@sha256:a967991e635dc8327c25c9d20ea71089a9cad66793013c5675c81a1f6c79292b
+ARG STERN_VERSION=1.31.0@sha256:6d4bc0513326811f8375da3a86e4ae3a4719412414c54d1b3409bddf1a183ac4
 
 # Talos Stuff
 ARG TALOSCTL_VERSION=v1.8.3@sha256:1b3570ac0354cde24ddf1a00f619ae8f2510a89178408f22665e90f22b852b37
@@ -28,8 +32,8 @@ ARG TALHELPER_VERSION=v3.0.10@sha256:8c002f08c822379914d7f2bc05cb62c9933de2ffd44
 
 # Misc Tools
 ARG TASKFILE_VERSION=v3.38.0@sha256:308c4f5be86bffae3f956cbd7225c4fec69b0e7a89012120b818a10df45d7c59
-ARG BITWARDEN_CLI_VERSION=2024.8.1
 ARG MINIO_CLI_VERSION=RELEASE.2024-10-08T09-37-26Z@sha256:c0d345a438dcac5677c1158e4ac46637069b67b3cc38e7b04c08cf93bdee4a62
+ARG BITWARDEN_CLI_VERSION=2024.8.1
 
 ## ================================================================================================
 # "Build" stage for utilities with docker images already present
@@ -43,16 +47,20 @@ FROM ghcr.io/getsops/sops:${SOPS_VERSION} AS sops
 FROM ghcr.io/mirceanton/age:${AGE_VERSION} AS age
 FROM ghcr.io/mirceanton/age-keygen:${AGE_KEYGEN_VERSION} AS age-keygen
 
-# Kubernetes Stuff
+# Flux Stuff
 FROM ghcr.io/fluxcd/flux-cli:${FLUX_VERSION} AS flux
 FROM ghcr.io/mirceanton/tfctl:${TFCTL_VERSION} AS tfctl
+
+# Kubectl + Plugins
 FROM docker.io/bitnami/kubectl:${KUBECTL_VERSION} AS kubectl
-FROM ghcr.io/mirceanton/kubectl-switch:${KUBECTL_SWITCH_VERSION} AS kubectl-switch
-FROM docker.io/derailed/k9s:${K9S_VERSION} AS k9s
-#TODO: helm container
-FROM registry.k8s.io/kustomize/kustomize:${KUSTOMIZE_VERSION} AS kustomize
-FROM ghcr.io/stern/stern:${STERN_VERSION} AS stern
 FROM ghcr.io/kubecolor/kubecolor:${KUBECOLOR_VERSION} as kubecolor
+FROM ghcr.io/mirceanton/kubectl-switch:${KUBECTL_SWITCH_VERSION} AS kubectl-switch
+
+# Misc K8S Tools
+FROM registry.k8s.io/kustomize/kustomize:${KUSTOMIZE_VERSION} AS kustomize
+#TODO: helm container
+FROM docker.io/derailed/k9s:${K9S_VERSION} AS k9s
+FROM ghcr.io/stern/stern:${STERN_VERSION} AS stern
 
 # Talos Stuff
 FROM ghcr.io/siderolabs/talosctl:${TALOSCTL_VERSION} AS talosctl

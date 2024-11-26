@@ -14,18 +14,19 @@ GitOps Toolkit is a Docker image that contains a collection of tools necessary f
 | Flux | v2.4.0 |
 | Tfctl | v0.16.0 |
 | Kubectl | 1.31.3 |
-| Kubectl Switch | v2.0.0 |
-| K9S | v0.32.7 |
-| Helm | v3.13.3 |
-| Kustomize | v5.4.3 |
-| Stern | 1.31.0 |
 | Kubecolor | v0.4.0 |
+| Kubectl Switch | v2.0.0 |
+| Kubectl Pgo | v0.5.0 |
+| Kustomize | v5.4.3 |
+| Helm | v3.13.3 |
+| K9S | v0.32.7 |
+| Stern | 1.31.0 |
 | Talosctl | v1.8.3 |
 | Talswitcher | v1.1.2 |
 | Talhelper | v3.0.10 |
 | Taskfile | v3.38.0 |
-| Bitwarden Cli | 2024.8.1 |
 | Minio Cli | RELEASE.2024 |
+| Bitwarden Cli | 2024.8.1 |
 | yamllint | 1.35.1 |
 | jq | 1.8.0 |
 | yq | 3.4.3 |

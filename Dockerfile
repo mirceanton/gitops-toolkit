@@ -18,6 +18,7 @@ ARG TFCTL_VERSION=v0.16.0-rc.4@sha256:5bc929e7c083e5357ea9c31716f857784a67e93718
 ARG KUBECTL_VERSION=1.31.3@sha256:67096b043f84a462b349ebcdcb4258a4f18d1de93ea43cf0df4c908bb877a1ad
 ARG KUBECOLOR_VERSION=v0.4.0@sha256:f87c8893a1ae6e031fcb96af6901d146a0542d7ec1a27025d4d9f05e4c18232d
 ARG KUBECTL_SWITCH_VERSION=v2.0.0@sha256:d4a04dbadb6dec078db12aff547add28af18a3e2e5951e430e33cce03e9aa8c3
+ARG KUBECTL_PGO_VERSION=v0.5.0
 
 # Misc K8S Tools
 ARG KUSTOMIZE_VERSION=v5.4.3@sha256:6dd0a67e2a8634a5d1aabd9c5e888ff220663e979b55bc17fe4b3a845718bb10
@@ -88,6 +89,10 @@ RUN wget https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz -O helm.tar
 	tar xvf helm.tar.gz && \
 	mv linux-amd64/helm /bin/helm
 
+FROM alpine@sha256:1e42bbe2508154c9126d48c2b8a75420c3544343bf86fd041fb7527e017a4b4a AS kubectl-pgo
+ARG KUBECTL_PGO_VERSION
+RUN wget https://github.com/CrunchyData/postgres-operator-client/releases/download/${KUBECTL_PGO_VERSION}/kubectl-pgo-linux-amd64 && \
+	mv kubectl-pgo-linux-amd64 /bin/kubectl-pgo
 
 ## ================================================================================================
 ## Main image
@@ -116,6 +121,7 @@ COPY --from=tfctl /tfctl /usr/local/bin/tfctl
 COPY --from=bitwarden-cli /bin/bw /usr/local/bin/bw
 COPY --from=kubecolor /usr/local/bin/kubecolor /usr/local/bin/kubecolor
 COPY --from=minio-cli /usr/bin/mc /usr/local/bin/mc
+COPY --from=kubectl-pgo /bin/kubectl-pgo /usr/local/bin/kubectl-pgo
 
 # Setup bash completions
 RUN kustomize completion bash | sudo tee /etc/bash_completion.d/kustomize.bash > /dev/null
@@ -124,6 +130,7 @@ RUN talosctl completion bash | sudo tee /etc/bash_completion.d/talosctl.bash > /
 RUN talhelper completion bash | sudo tee /etc/bash_completion.d/talhelper.bash > /dev/null
 RUN kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl.bash > /dev/null
 RUN kubectl switch completion bash | sudo tee /etc/bash_completion.d/kubectl-switch.bash > /dev/null
+RUN kubectl pgo completion bash | sudo tee /etc/bash_completion.d/kubectl-pgo.bash > /dev/null
 RUN helm completion bash | sudo tee /etc/bash_completion.d/helm.bash > /dev/null
 RUN flux completion bash | sudo tee /etc/bash_completion.d/flux.bash > /dev/null
 RUN tfctl completion bash | sudo tee /etc/bash_completion.d/tfctl.bash > /dev/null

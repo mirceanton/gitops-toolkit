@@ -35,6 +35,7 @@ ARG TALHELPER_VERSION=v3.0.10@sha256:8c002f08c822379914d7f2bc05cb62c9933de2ffd44
 ARG TASKFILE_VERSION=v3.38.0@sha256:308c4f5be86bffae3f956cbd7225c4fec69b0e7a89012120b818a10df45d7c59
 ARG MINIO_CLI_VERSION=RELEASE.2024-10-08T09-37-26Z@sha256:c0d345a438dcac5677c1158e4ac46637069b67b3cc38e7b04c08cf93bdee4a62
 ARG BITWARDEN_CLI_VERSION=2024.8.1
+ARG CMCTL_VERSION=v2.1.1
 
 ## ================================================================================================
 # "Build" stage for utilities with docker images already present
@@ -94,6 +95,11 @@ ARG KUBECTL_PGO_VERSION
 RUN wget https://github.com/CrunchyData/postgres-operator-client/releases/download/${KUBECTL_PGO_VERSION}/kubectl-pgo-linux-amd64 && \
 	mv kubectl-pgo-linux-amd64 /bin/kubectl-pgo
 
+FROM alpine@sha256:1e42bbe2508154c9126d48c2b8a75420c3544343bf86fd041fb7527e017a4b4a AS cmctl
+ARG CMCTL_VERSION
+RUN wget https://github.com/cert-manager/cmctl/releases/download/${CMCTL_VERSION}/cmctl_linux_amd64 && \
+	mv cmctl_linux_amd64 /bin/cmctl
+
 ## ================================================================================================
 ## Main image
 ## ================================================================================================
@@ -122,6 +128,7 @@ COPY --from=bitwarden-cli /bin/bw /usr/local/bin/bw
 COPY --from=kubecolor /usr/local/bin/kubecolor /usr/local/bin/kubecolor
 COPY --from=minio-cli /usr/bin/mc /usr/local/bin/mc
 COPY --from=kubectl-pgo /bin/kubectl-pgo /usr/local/bin/kubectl-pgo
+COPY --from=cmctl /bin/cmctl /usr/local/bin/cmctl
 
 # Setup bash completions
 RUN kustomize completion bash | sudo tee /etc/bash_completion.d/kustomize.bash > /dev/null
@@ -134,6 +141,7 @@ RUN kubectl pgo completion bash | sudo tee /etc/bash_completion.d/kubectl-pgo.ba
 RUN helm completion bash | sudo tee /etc/bash_completion.d/helm.bash > /dev/null
 RUN flux completion bash | sudo tee /etc/bash_completion.d/flux.bash > /dev/null
 RUN tfctl completion bash | sudo tee /etc/bash_completion.d/tfctl.bash > /dev/null
+RUN cmctl completion bash | sudo tee /etc/bash_completion.d/cmctl.bash > /dev/null
 RUN terraform -install-autocomplete
 RUN echo "complete -C /usr/local/bin/mc mc" | sudo tee /etc/bash_completion.d/mc.bash > /dev/null
 

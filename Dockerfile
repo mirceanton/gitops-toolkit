@@ -78,25 +78,25 @@ FROM docker.io/minio/mc:${MINIO_CLI_VERSION} AS minio-cli
 ## ================================================================================================
 # Build stages for other utilities
 ## ================================================================================================
-FROM alpine@sha256:5cc1526ee5c99c2982793abe22861e6047cfb5c8609cbe2d6bbe11d836263354 AS bitwarden-cli
+FROM alpine@sha256:21dc6063fd678b478f57c0e13f47560d0ea4eeba26dfc947b2a4f81f686b9f45 AS bitwarden-cli
 ARG BITWARDEN_CLI_VERSION
 RUN wget https://github.com/bitwarden/clients/releases/download/cli-v${BITWARDEN_CLI_VERSION}/bw-oss-linux-${BITWARDEN_CLI_VERSION}.zip -O bitwarden.zip && \
 	unzip bitwarden.zip && \
 	mv bw /bin/bw
 
-FROM alpine@sha256:5cc1526ee5c99c2982793abe22861e6047cfb5c8609cbe2d6bbe11d836263354 AS helm
+FROM alpine@sha256:21dc6063fd678b478f57c0e13f47560d0ea4eeba26dfc947b2a4f81f686b9f45 AS helm
 ARG HELM_VERSION
 RUN wget https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz -O helm.tar.gz && \
 	tar xvf helm.tar.gz && \
 	mv linux-amd64/helm /bin/helm
 
-FROM alpine@sha256:5cc1526ee5c99c2982793abe22861e6047cfb5c8609cbe2d6bbe11d836263354 AS kubectl-pgo
+FROM alpine@sha256:21dc6063fd678b478f57c0e13f47560d0ea4eeba26dfc947b2a4f81f686b9f45 AS kubectl-pgo
 ARG KUBECTL_PGO_VERSION
 RUN wget https://github.com/CrunchyData/postgres-operator-client/releases/download/${KUBECTL_PGO_VERSION}/kubectl-pgo-linux-amd64 && \
 	mv kubectl-pgo-linux-amd64 /bin/kubectl-pgo && \
 	chmod +x /bin/kubectl-pgo
 
-FROM alpine@sha256:5cc1526ee5c99c2982793abe22861e6047cfb5c8609cbe2d6bbe11d836263354 AS cmctl
+FROM alpine@sha256:21dc6063fd678b478f57c0e13f47560d0ea4eeba26dfc947b2a4f81f686b9f45 AS cmctl
 ARG CMCTL_VERSION
 RUN wget https://github.com/cert-manager/cmctl/releases/download/${CMCTL_VERSION}/cmctl_linux_amd64 && \
 	mv cmctl_linux_amd64 /bin/cmctl && \

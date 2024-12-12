@@ -105,7 +105,7 @@ RUN wget https://github.com/cert-manager/cmctl/releases/download/${CMCTL_VERSION
 ## ================================================================================================
 ## Main image
 ## ================================================================================================
-FROM mcr.microsoft.com/devcontainers/python:3.12-bullseye@sha256:d43b2ff9bfb3ad6c6f1ce96fd533f0dae51addf007f574610df5cf277704aa76 AS workspace
+FROM mcr.microsoft.com/devcontainers/python:3.12-bullseye@sha256:d2d7d198be0fb6cb8be8fcff6cb0bde5703c8b0d65509e0a13735d8032bd539d AS workspace
 ENV EDITOR=vim
 
 # Install tools

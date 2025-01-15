@@ -17,7 +17,7 @@ GitOps Toolkit is a Docker image that contains a collection of tools necessary f
 | Kubecolor | v0.5.0 |
 | Kubectl Switch | v2.0.0 |
 | Kubectl Pgo | v0.5.0 |
-| Kustomize | v5.4.3 |
+| Kustomize | v5.6.0 |
 | Helm | v3.13.3 |
 | K9S | v0.32.7 |
 | Stern | 1.31.0 |

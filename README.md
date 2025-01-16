@@ -21,7 +21,7 @@ GitOps Toolkit is a Docker image that contains a collection of tools necessary f
 | Helm | v3.13.3 |
 | K9S | v0.32.7 |
 | Stern | 1.31.0 |
-| Talosctl | v1.9.1 |
+| Talosctl | v1.9.2 |
 | Talswitcher | v1.1.2 |
 | Talhelper | v3.0.14 |
 | Taskfile | v3.38.0 |

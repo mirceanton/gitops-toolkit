@@ -38,7 +38,7 @@ terraform = "1.10.4"
 "npm:@bitwarden/cli" = "v2024.8.1"
 "aqua:cert-manager/cmctl" = "2.1.1"
 "aqua:jqlang/jq" = "1.7.1"
-"aqua:mikefarah/yq" = "3.4.3"
+"aqua:mikefarah/yq" = "4.45.1"
 
 # Linters
 "pipx:yamllint" = "1.35.1"

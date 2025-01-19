@@ -1,3 +1,6 @@
+[settings]
+experimental= "true"
+
 [tools]
 # Runtimes
 node = "22.13.0"

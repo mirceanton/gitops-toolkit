@@ -35,7 +35,7 @@ terraform = "1.10.4"
 
 # Misc Tools
 "aqua:go-task/task" = "3.38.0"
-"asdf:minio/mc" = "RELEASE.2024-10-08T09-37-26Z"
+"go:github.com/minio/mc" = "RELEASE.2024-10-08T09-37-26Z"
 # minio cli
 "npm:@bitwarden/cli" = "v2024.8.1"
 "aqua:cert-manager/cmctl" = "2.1.1"

@@ -18,7 +18,7 @@ terraform = "1.10.4"
 
 # Flux Stuff
 "aqua:fluxcd/flux2" = "2.4.0"
-# "aqua:flux-iac/tofu-controller/tfctl" = "0.15.0"
+"aqua:flux-iac/tofu-controller/tfctl" = "0.16.0-rc.5"
 
 # Kubectl + Plugins
 "aqua:kubernetes/kubectl" = "1.32.1"

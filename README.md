@@ -12,7 +12,7 @@ GitOps Toolkit is a Docker image that contains a collection of tools necessary f
 | Age | v1.2.0 |
 | Age Keygen | V1.2.0 |
 | Flux | v2.4.0 |
-| Tfctl | v0.16.0 |
+| Tfctl | v0.16.0-rc.4 |
 | Kubectl | 1.32.1 |
 | Kubecolor | v0.5.0 |
 | Kubectl Switch | v2.0.0 |
@@ -25,7 +25,7 @@ GitOps Toolkit is a Docker image that contains a collection of tools necessary f
 | Talswitcher | v1.1.2 |
 | Talhelper | v3.0.16 |
 | Taskfile | v3.38.0 |
-| Minio Cli | RELEASE.2024 |
+| Minio Cli | RELEASE.2024-10-08T09-37-26Z |
 | Bitwarden Cli | 2024.8.1 |
 | Cmctl | v2.1.1 |
 | yamllint | 1.35.1 |

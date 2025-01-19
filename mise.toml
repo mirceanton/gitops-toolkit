@@ -1,12 +1,12 @@
 [settings]
 experimental = true
-pipx.uvx = false 
 
 [tools]
 # Runtimes
 node = "22.13.0"
 python = "3.13.1"
-go = "1.23.5"
+uv = "0.5.21"
+#go = "1.23.5"
 
 # Terraform Stuff: https://mise.jdx.dev/mise-cookbook/terraform.html
 terraform = "1.10.4"
@@ -39,12 +39,11 @@ terraform = "1.10.4"
 
 # Misc Tools
 "aqua:go-task/task" = "3.38.0"
-"go:github.com/minio/mc" = "RELEASE.2024-10-08T09-37-26Z"
-# minio cli
+#"go:github.com/minio/mc" = "RELEASE.2024-10-08T09-37-26Z"
 "npm:@bitwarden/cli" = "v2024.8.1"
 "aqua:cert-manager/cmctl" = "2.1.1"
 
 # Linters
 "pipx:yamllint" = "1.35.1"
-"pipx:yq" = "3.4.3"
-"pipx:jq" = "1.8.0"
+"aqua:mikefarah/yq" = "4.45.1"
+"aqua:jqlang/jq" = "1.7.1"

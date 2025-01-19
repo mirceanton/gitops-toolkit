@@ -9,7 +9,8 @@ RUN sudo apt update -y && sudo apt install -y gpg sudo wget curl && \
 	wget -qO - https://mise.jdx.dev/gpg-key.pub | gpg --dearmor | sudo tee /etc/apt/keyrings/mise-archive-keyring.gpg 1> /dev/null && \
 	echo "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=amd64] https://mise.jdx.dev/deb stable main" | sudo tee /etc/apt/sources.list.d/mise.list && \
 	sudo apt update && sudo apt install -y mise
-RUN echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc
+RUN echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc && \
+	echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zshrc
 
 # Copy over mise config
 WORKDIR /workspace

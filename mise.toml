@@ -22,7 +22,7 @@ terraform = "1.10.4"
 
 # Kubectl + Plugins
 "aqua:kubernetes/kubectl" = "1.32.1"
-# kubecolor
+"aqua:kubecolor" = "0.0.25"
 # kubectl-switch
 # kubectl-pgo
 

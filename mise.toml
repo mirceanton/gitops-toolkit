@@ -37,7 +37,7 @@ terraform = "1.10.4"
 # minio cli
 "aqua:bitwarden/clients" = "desktop-v2024.8.1"
 "aqua:cert-manager/cmctl" = "2.1.1"
-"aqua:jqlang/jq" = "1.8.0"
+"aqua:jqlang/jq" = "1.7.1"
 "aqua:mikefarah/yq" = "3.4.3"
 
 # Linters

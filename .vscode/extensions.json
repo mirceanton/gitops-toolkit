@@ -6,6 +6,7 @@
         "redhat.vscode-yaml",
         "pkief.material-icon-theme",
         "ms-azuretools.vscode-docker",
-        "DavidAnson.vscode-markdownlint"
+        "DavidAnson.vscode-markdownlint",
+        "tamasfe.even-better-toml"
     ],
 }

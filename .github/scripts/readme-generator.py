@@ -9,38 +9,74 @@ output_path = "../../README.md"
 
 # Initialize a list to store tool and dependency information
 tools = []
-dependencies = []
 
+# =================================================================================================
+# Extract Tool Versions From Dockerfile ARGs
+# =================================================================================================
 # Regular expression to match ARG lines that define tool versions
-version_pattern = re.compile(r'ARG\s+(\w+)_VERSION=([\w.]+)')
+regex = r"ARG\s+([A-Z0-9_]+)_VERSION=([\w\.\-]+)"
 
-# Read the Dockerfile and extract tool versions
-with open(dockerfile_path, 'r') as dockerfile:
-    for line in dockerfile:
-        # Search for ARG lines to get tool versions
-        version_match = version_pattern.search(line)
-        if version_match:
-            tool_name = version_match.group(1).replace(
-                '_', ' ').title().replace('version', '').strip()
-            tool_version = version_match.group(2)
-            tools.append((tool_name, tool_version))
+# Read the Dockerfile and extract matches
+def extract_versions(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            content = file.read()
+            matches = re.findall(regex, content)
+            return matches
+    except FileNotFoundError:
+        print(f"Error: File '{file_path}' not found.")
+        return []
 
+# Process the Dockerfile
+print("Extracting version numbers from Dockerfile...")
+dockerfile_tool_versions = extract_versions(dockerfile_path)
+if dockerfile_tool_versions:
+    print(f"Found {len(dockerfile_tool_versions)} tools.")
+else:
+    print("No matches found or file is empty.")
+    exit(1)
+
+# Append dockerfile versions
+for tool in dockerfile_tool_versions:
+    tool_name = tool[0].replace('_', ' ').title().replace('version', '').strip()
+    tool_version = tool[1]
+    tools.append((tool_name, tool_version))
+
+# =================================================================================================
+# Extract Tool Versions From Python Requirements
+# =================================================================================================
 # Read the requirements.txt and extract dependencies
-with open(requirements_path, 'r') as requirements_file:
-    for line in requirements_file:
-        # Each line should have the format `package==version`
-        if '==' in line:
-            dependency_name, dependency_version = line.strip().split('==')
-            dependencies.append((dependency_name, dependency_version))
+def extract_pip_versions(file_path):
+    dependencies = []
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:
+                # Each line should have the format `package==version`
+                if '==' in line:
+                    dependency_name, dependency_version = line.strip().split('==')
+                    dependencies.append((dependency_name, dependency_version))
+            return dependencies
+    except FileNotFoundError:
+        print(f"Error: File '{file_path}' not found.")
+        return []
+
+# Process the requirements file
+print("Extracting version numbers from requirements.txt ...")
+python_tool_versions = extract_pip_versions(requirements_path)
+if python_tool_versions:
+    print(f"Found {len(python_tool_versions)} tools.")
+else:
+    print("No matches found or file is empty.")
+    exit(1)
+
+# Append python versions
+for tool in python_tool_versions:
+    tools.append((tool[0], tool[1]))
 
 # Generate the Markdown table for tools
 markdown_table = "| Tool/Dependency | Version |\n|----------------|---------|\n"
 for tool in tools:
     markdown_table += f"| {tool[0]} | {tool[1]} |\n"
-
-# Add the dependencies to the Markdown table
-for dependency in dependencies:
-    markdown_table += f"| {dependency[0]} | {dependency[1]} |\n"
 
 # Setup Jinja2 environment
 env = Environment(loader=FileSystemLoader('.'))

@@ -41,4 +41,4 @@ terraform = "1.10.4"
 "aqua:mikefarah/yq" = "4.45.1"
 
 # Linters
-"pipx:yamllint@1.35.1" = "latest"
+"pipx:yamllint" = "latest"

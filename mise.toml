@@ -24,7 +24,7 @@ terraform = "1.10.4"
 "aqua:kubernetes/kubectl" = "1.32.1"
 "aqua:kubecolor" = "0.0.25"
 # kubectl-switch
-# kubectl-pgo
+"ubi:CrunchyData/postgres-operator-client" = "0.5.1"
 
 # Misc K8S Tools
 "aqua:kubernetes-sigs/kustomize" = "5.6.0"
@@ -47,3 +47,6 @@ terraform = "1.10.4"
 "pipx:yamllint" = "1.35.1"
 "aqua:mikefarah/yq" = "4.45.1"
 "aqua:jqlang/jq" = "1.7.1"
+
+[hooks]
+postinstall = ["alias cpgo=postgres-operator-client"]

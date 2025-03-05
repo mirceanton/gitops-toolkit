@@ -2,7 +2,7 @@
 # Utility versions
 ## ================================================================================================
 # Terraform Stuff
-ARG TERRAFORM_VERSION=1.11.0@sha256:ece24a48464368a6b59aeb949ccaefd415d0c9c7bf8db1011db5701a83d3d26e
+ARG TERRAFORM_VERSION=1.11.1@sha256:42e70cc10f0d6ae50807e4302ff512986f48dbd49616f629d6978912bfabae70
 ARG TFLINT_VERSION=v0.55.1@sha256:4136a6ec3d6659551f2b8f63be8bd413c8c1d842506a5597a26bf4e8bc1eac16
 
 # Secret Encryption Stuff

@@ -3,7 +3,7 @@
 ## ================================================================================================
 # Terraform Stuff
 ARG TERRAFORM_VERSION=1.11.3@sha256:c2c17884347f9b5f3d71067a3ef1fb736f748979f89b35a2e4b5225735e7fe01
-ARG TFLINT_VERSION=v0.55.1@sha256:4136a6ec3d6659551f2b8f63be8bd413c8c1d842506a5597a26bf4e8bc1eac16
+ARG TFLINT_VERSION=v0.56.0@sha256:102aa738eb7af25d6e6cdf814b9301de151bf4a2bab41c7d304fddd61d6a4b6d
 
 # Secret Encryption Stuff
 ARG SOPS_VERSION=v3.9.4@sha256:64901dd14125bd141a3f8d2413bdfc912e3f6ca8560fe44d905de0e840bf0ca0

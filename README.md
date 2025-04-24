@@ -13,7 +13,7 @@ GitOps Toolkit is a Docker image that contains a collection of tools necessary f
 | Age Keygen | V1.2.0 |
 | Flux | v2.5.1 |
 | Tfctl | v0.16.0-rc.4 |
-| Kubectl | 1.32.4 |
+| Kubectl | 1.33.0 |
 | Kubecolor | v0.5.0 |
 | Kubectl Switch | v2.2.3 |
 | Kubectl Pgo | v0.5.0 |

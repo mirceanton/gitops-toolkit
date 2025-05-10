@@ -1,12 +1,3 @@
-> [!IMPORTANT]
-> This repository will be **archived on June 1st, 2025** and the associated Docker images will be **removed from GHCR on August 1st, 2025**.
-> 
-> The GitOps Toolkit was originally created to serve as a base for my DevContainer setups. I have since migrated to using [`mise`](https://mise.jdx.dev/) as a package manager, which has effectively replaced this solution with a more flexible approach.
->
-> If you're currently using this image, please plan your migration to alternative solutions before the deprecation dates or fork this repository to maintain your own version.
-> 
-> For an alternative approach to managing developer environments, I recommend exploring [`mise`](https://mise.jdx.dev/) or other devtool management solutions.
-
 # GitOps Toolkit
 
 GitOps Toolkit is a Docker image that contains a collection of tools necessary for me to manage my GitOps infrastructure. This image is designed to simplify the setup and management of a development environment for infrastructure as code (IaC), Kubernetes management, secret encryption, and other related tasks.
